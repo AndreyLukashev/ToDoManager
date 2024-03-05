@@ -15,7 +15,7 @@ export class View {
         throw new Error('This method should be overriden!')
     }
 
-    prepareRender() {
+    prepareRender = () => {
         const modelsData = Object.keys(this.models).reduce((acc, key) => {
             acc[key] = this.models[key].getState();
             return acc;
