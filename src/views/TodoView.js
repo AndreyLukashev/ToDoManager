@@ -2,13 +2,21 @@ import { View } from './View';
 
 export class TodoView extends View {
 
+  openCreateTaskModel(callback) {
+    this.el.addEventListener('click', (evt) => {
+     if(evt.target.closest('.open-create-task-model')) {
+      callback();
+     }
+    });
+  }
+
     render({todoModel}) {
         const{data} = todoModel;
         return `
         <div class="mt-16">
           <div class="flex justify-between items-center">
             <p class="text-sky-500">Total Tasks ${data.length}</p>
-            <button class="bg-sky-500 p-2 text-white rounded">Create Task</button>
+            <button class="bg-sky-500 p-2 text-white rounded open-create-task-model">Create Task</button>
           </div>
 
           <div class="mt-5 flex flex-col gap-6">
