@@ -18,4 +18,4 @@ export const INITIAL_STATE = {
             onReject: () => null,
         },
     },
-};
+}

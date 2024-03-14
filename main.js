@@ -9,32 +9,32 @@ import { ModalController } from './src/controllers/ModalController';
 
 const root = document.querySelector('#root');
 
-// ContainerElements
+// // ContainerElements
 const todoContainer = document.createElement('div');
 const modalContainer = document.createElement('div');
-// ContainerElements
+// // ContainerElements
 
 root.append(todoContainer, modalContainer);
 
-//================================================================
+// //================================================================
 
-// Models
+// // Models
 const todoModel = new TodoModel(INITIAL_STATE.tasks);
 const modalModel = new ModalModel(INITIAL_STATE.modal);
-// Models
+// // Models
 
-//=================================================================
+// //=================================================================
 
-// Views
+// // Views
 const todoView = new TodoView(todoContainer, {todoModel});
 const modalView = new ModalView(modalContainer, {modalModel});
-// Views
+// // Views
 
-//=================================================================
+// //=================================================================
 
-// Controllers
+// // Controllers
 new TodoController({todoModel, modalModel}, todoView);
 new ModalController({modalModel}, modalView);
-// Controllers
+// // Controllers
 
-//=================================================================
+// //=================================================================

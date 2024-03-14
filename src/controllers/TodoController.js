@@ -10,24 +10,39 @@ export class TodoController {
     }
     openCreateTaskModel() {
         this.view.openCreateTaskModel(() => {
-            console.log('click')
             this.modalModel.open(MODAL_TEMPLATES.todoFormTemplate, {
                 isOpen: true,
+                
                 title: 'Create Task',
+
                 btnSuccess: {
                     caption: 'Create',
                 },
+
                 btnReject: {
                     caption: "Cancel",
                 },
+
                 onSuccess: (modelEl) => {
                   const formData = new FormData(
-                    modelEl.querySelector("create-task-modal")
+                    modelEl.querySelector(".create-task-modal")
                     );
-                    this.todoModel.create(extractFormData(formData));
+                    this.todoModel.create({
+                        title: formData.get("title"),
+                        planToFinish: formData.get("planToFinish"),
+                        description: formData.get("description"),
+                    });
                 },
+
                 onReject: () => {
-                    console.log("reject");
+                    this.modalModel.close();
+                },
+
+                onRejectEsc: () => {
+                    this.modalModel.close();
+                },
+
+                onClose: () => {
                     this.modalModel.close();
                 },
             });
