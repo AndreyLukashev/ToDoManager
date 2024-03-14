@@ -30,10 +30,10 @@ export class ModalView extends View {
     }
 
     onRejectEsc() {
-        document.addEventListener('keydown', (evt) => {
+        window.addEventListener('keydown', (evt) => {
             if (evt.keyCode == 27) {
                 const state = this.models.modalModel.getState();
-                state.data.onRejectEsc(document);
+                state.data.onRejectEsc(this.el);
             }
         });
     }
