@@ -1,13 +1,28 @@
 import { MODAL_TEMPLATES } from "../constants/modalTemplates";
+import { STORAGE_KEYS } from "../constants/storageKeys";
+import { storageService } from "../services/Storage";
+import { extractFormData } from "../utils/extractFormdata";
 
 export class TodoController {
     constructor(models, view) {
       this.view = view;
       this.todoModel = models.todoModel; 
       this.modalModel = models.modalModel;
-
+      this.initTasks();
       this.openCreateTaskModel();
+      this.deleteTask();
     }
+
+    initTasks() {
+        this.todoModel.initTasks(storageService.getItem(STORAGE_KEYS.tasks));
+    }
+
+deleteTask() {
+    this.view.onDelete((id) => {
+        this.todoModel.delete(id);
+    })
+}
+
     openCreateTaskModel() {
         this.view.openCreateTaskModel(() => {
             this.modalModel.open(MODAL_TEMPLATES.todoFormTemplate, {
@@ -32,6 +47,7 @@ export class TodoController {
                         planToFinish: formData.get("planToFinish"),
                         description: formData.get("description"),
                     });
+                    this.modalModel.close();
                 },
 
                 onReject: () => {
