@@ -7,7 +7,7 @@ export class Model extends EventTarget {
     getState() {
         return this.state
     }
-    
+
     setState(state) {
         this.state = state;
         this.dispatchEvent(new Event('model:change'))

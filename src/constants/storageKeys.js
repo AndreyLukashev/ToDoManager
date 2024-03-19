@@ -1,3 +1,3 @@
 export const STORAGE_KEYS = {
-    tasks: "tasks",
+  tasks: "tasks",
 };

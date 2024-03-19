@@ -2,8 +2,11 @@ export class View {
     constructor(el, models = {}) {
         this.el = el;
         this.models = models;
+        this.prepareRender = this.prepareRender.bind(this);
+        
         this.prepareRender();
         this.subscribe();
+
     }
 
     destroy() {
@@ -12,10 +15,10 @@ export class View {
     }
 
     render() {
-        throw new Error('This method should be overriden!')
+        throw new Error('This method should be overridden!')
     }
 
-    prepareRender = () => {
+    prepareRender() {
         const modelsData = Object.keys(this.models).reduce((acc, key) => {
             acc[key] = this.models[key].getState();
             return acc;
@@ -24,6 +27,7 @@ export class View {
         this.el.innerHTML = this.render(modelsData)
     }
 
+
     subscribe() {
         Object.values(this.models).forEach((model) => {
             model.addEventListener('model:change', this.prepareRender)
@@ -31,7 +35,7 @@ export class View {
     }
 
     unsubscribe() {
-        Object.values(this.models).forEach((model) => {
+         Object.values(this.models).forEach((model) => {
             model.removeEventListener('model:change', this.prepareRender)
         })
     }
