@@ -2,6 +2,7 @@ import { INITIAL_STATE } from "../constants/initialState";
 import { Model } from "./Model";
 
 export class ModalModel extends Model {
+    
     open(template, data) {
         this.setState({ template, data });
     }
@@ -11,3 +12,4 @@ export class ModalModel extends Model {
     }
 
 }
+

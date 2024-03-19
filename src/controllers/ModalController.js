@@ -3,6 +3,5 @@ export class ModalController {
         view.onSuccess();
         view.onReject();
         view.onRejectEsc();
-        view.onClose();
     }
 }
