@@ -25,18 +25,29 @@ export class TodoView extends View {
     });
   }
 
+  completeTask(callback) {
+    this.el.addEventListener("change", (evt) => {
+      if (evt.target.closest(".complete-task-checkbox")) {
+        callback(evt.target.dataset.id, evt.target.checked);
+      }
+    });
+  }
+
   renderTasks(tasks) {
     return tasks
       .map((item) => {
         const isChecked = item.isCompleted ? "checked" : "";
+        const isExpired = new Date() > new Date(item.planToFinish);
+        const background = isExpired ? "bg-red-400/30" : "bg-slate-700";
+
 
         return `
-          <div class="rounded bg-slate-700 p-2 border border-slate-500">
+          <div class="rounded ${background} bg-slate-700 p-2 border border-slate-500">
             <div class="flex justify-between items-center">
 
               <div class="flex gap-2">
-                <input type="checkbox" ${isChecked} />
-                <h3 class="text-lg text-white line-clamp-2">${item.title}</h3>
+                <input data-id="${item.id}" type="checkbox"  ${isChecked} class="complete-task-checkbox" />
+                <h3 class="${item.isCompleted ? "line-through" : ""} text-lg text-white line-clamp-2">${item.title}</h3>
               </div>
 
               <div class="flex gap-2">
