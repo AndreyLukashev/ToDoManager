@@ -13,6 +13,7 @@ export class TodoController {
     this.openCreateTaskModal();
     this.deleteTask();
     this.openEditTaskModal();
+    this.completeTask();
   }
 
   initTasks() {
@@ -52,6 +53,12 @@ export class TodoController {
       })
      
     })
+  }
+
+  completeTask(){
+    this.view. completeTask((id, isCompleted) =>{
+this.todoModel.update(id, {isCompleted})
+    });
   }
 
   openCreateTaskModal() {
