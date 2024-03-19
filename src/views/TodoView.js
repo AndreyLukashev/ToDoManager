@@ -17,6 +17,14 @@ export class TodoView extends View {
     });
   }
 
+  onEditTask(callback) {
+    this.el.addEventListener("click", (evt) => {
+      if (evt.target.closest(".edit-btn")) {
+        callback(evt.target.dataset.id);
+      }
+    });
+  }
+
   renderTasks(tasks) {
     return tasks
       .map((item) => {
@@ -32,7 +40,7 @@ export class TodoView extends View {
               </div>
 
               <div class="flex gap-2">
-                <button class="bg-sky-500 px-2 rounded text-white">Edit</button>
+                <button data-id="${item.id}" class="edit-btn bg-sky-500 px-2 rounded text-white">Edit</button>
                 <button data-id="${item.id}" class="delete-btn bg-red-500 px-2 text-white rounded">Delete</button>
               </div>
 
