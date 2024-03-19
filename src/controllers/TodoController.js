@@ -12,6 +12,7 @@ export class TodoController {
     this.initTasks();
     this.openCreateTaskModal();
     this.deleteTask();
+    this.openEditTaskModal();
   }
 
   initTasks() {
@@ -22,6 +23,35 @@ export class TodoController {
     this.view.onDelete((id) => {
       this.todoModel.delete(id);
     });
+  }
+
+  openEditTaskModal() {
+    this.view.onEditTask((id) => {
+      const state = this.todoModel.getState();
+      const currentTask = state.data.find((item) => item.id === id);
+      this.modalModel.open(MODAL_TEMPLATES.todoFormTemplate, {
+        isOpen: true,
+        title: "Edit Task",
+        btnSuccess: {
+          caption: "Edit",
+        },
+        btnReject: {
+          caption: "Cancel",
+        },
+
+        formData: currentTask,
+        onSuccess: (modelEl) => {
+          const formData = new FormData(
+            modelEl.querySelector(".create-task-modal"));
+            this.todoModel.update(id, extractFormData(formData))
+            this.modalModel.close();
+        },
+        onReject: () => {
+          this.modalModel.close();
+        },
+      })
+     
+    })
   }
 
   openCreateTaskModal() {
