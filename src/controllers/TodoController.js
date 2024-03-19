@@ -9,7 +9,7 @@ export class TodoController {
       this.todoModel = models.todoModel; 
       this.modalModel = models.modalModel;
       this.initTasks();
-      this.openCreateTaskModel();
+      this.openCreateTaskModal();
       this.deleteTask();
     }
 
@@ -23,8 +23,8 @@ deleteTask() {
     })
 }
 
-    openCreateTaskModel() {
-        this.view.openCreateTaskModel(() => {
+    openCreateTaskModal() {
+        this.view.openCreateTaskModal(() => {
             this.modalModel.open(MODAL_TEMPLATES.todoFormTemplate, {
                 isOpen: true,
                 
@@ -39,30 +39,17 @@ deleteTask() {
                 },
 
                 onSuccess: (modelEl) => {
-                  const formData = new FormData(
-                    modelEl.querySelector(".create-task-modal")
+                    const formData = new FormData(
+                        modelEl.querySelector(".create-task-modal")
                     );
-                    this.todoModel.create({
-                        title: formData.get("title"),
-                        planToFinish: formData.get("planToFinish"),
-                        description: formData.get("description"),
-                    });
+                    this.todoModel.create(extractFormData(formData));
                     this.modalModel.close();
                 },
 
                 onReject: () => {
                     this.modalModel.close();
                 },
-
-                onRejectEsc: () => {
-                    this.modalModel.close();
-                },
-
-                onClose: () => {
-                    this.modalModel.close();
-                },
             });
-
         });
     }
 }

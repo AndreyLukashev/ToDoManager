@@ -19,6 +19,7 @@ export class TodoModel extends Model {
     }
 
     create(data) {
+        
         const newTask ={
             ...data,
             id: uuidv4(),
@@ -28,7 +29,7 @@ export class TodoModel extends Model {
         this.setState({
             ...this.state, 
             data: this.setItems(this.getAllItems().concat(newTask)), 
-            });
+        });
     }
 
     delete(id) {
@@ -36,3 +37,7 @@ export class TodoModel extends Model {
         this.setState({...this.state, data: this.setItems()})
     }
 }
+
+// data: this.state.data.concat({
+//     
+// }) 

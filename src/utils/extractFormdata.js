@@ -1,6 +1,6 @@
 export const extractFormData = (formData) => {
     const data = {};
-    formData.foreach((value, key) => {
+    formData.forEach((value, key) => {
         data[key] = value;
     });
 

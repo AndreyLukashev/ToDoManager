@@ -9,16 +9,19 @@ class Storage {
         } catch (error) {
             console.error(error);
         }
-        
     }
 
     getItem(key) {
         try {
-            this.storage.removeItem(key);
+            return JSON.parse(this.storage.getItem(key))
         } catch (error) {
             console.error(error);
         }
         
+    }
+
+    removeItem(key) {
+        this.storage.removeItem(key);
     }
 
     clear() {
