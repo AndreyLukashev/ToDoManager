@@ -1,7 +1,7 @@
 import { MODAL_TEMPLATES } from "../constants/modalTemplates";
 import { STORAGE_KEYS } from "../constants/storageKeys";
 import { storageService } from "../services/Storage";
-import { extractFormData } from "../utils/extractFormData";
+import { extractFormData } from "../utils/extractFormdata";
 
 export class TodoController {
   constructor(models, view) {
